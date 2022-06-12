@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🥼16.4 Linux 系统启动和内核管理🔑Linux启动整个流程：如图所示：   硬件启动 打开电源 Bios MBR   grup引导启动 Stage1阶段 Srage1.5阶段 Stage2阶段   内核引导启动 系统初始化 &#x2F;etc&#x2F;inittab &#x2F;etc&#x2F;rc.sysinit 加载系统服务   启动终端 默认启动&#x2F;sbin&#x2F;mingetty  验证登录 登录成功   如果级别为“5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linu系统启动和内核管理">
+<meta property="og:url" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Juliulian">
+<meta property="og:description" content="🥼16.4 Linux 系统启动和内核管理🔑Linux启动整个流程：如图所示：   硬件启动 打开电源 Bios MBR   grup引导启动 Stage1阶段 Srage1.5阶段 Stage2阶段   内核引导启动 系统初始化 &#x2F;etc&#x2F;inittab &#x2F;etc&#x2F;rc.sysinit 加载系统服务   启动终端 默认启动&#x2F;sbin&#x2F;mingetty  验证登录 登录成功   如果级别为“5">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530230820507.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530231407710.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530232149177.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530232219478.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530232833837.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530232951839.png">
+<meta property="article:published_time" content="2022-05-30T14:53:37.000Z">
+<meta property="article:modified_time" content="2022-05-30T15:38:43.135Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://juliulian.github.io/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/image-20220530230820507.png">
+  
+  
+  <title>Linu系统启动和内核管理 - Juliulian</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"juliulian.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong> Juliulian&#39;Blog </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linu系统启动和内核管理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-30 14:53" pubdate>
+        May 30, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linu系统启动和内核管理</h1>
+            
+            <div class="markdown-body">
+              <h1 id="🥼16-4-Linux-系统启动和内核管理"><a href="#🥼16-4-Linux-系统启动和内核管理" class="headerlink" title="🥼16.4 Linux 系统启动和内核管理"></a>🥼16.4 Linux 系统启动和内核管理</h1><h1 id="🔑Linux启动整个流程："><a href="#🔑Linux启动整个流程：" class="headerlink" title="🔑Linux启动整个流程："></a>🔑Linux启动整个流程：</h1><p>如图所示：</p>
+<p><img src="image-20220530230820507.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220530230820507"></p>
+<ul>
+<li>硬件启动<ul>
+<li>打开电源</li>
+<li>Bios</li>
+<li>MBR</li>
+</ul>
+</li>
+<li><strong>grup引导启动</strong><ul>
+<li>Stage1阶段</li>
+<li>Srage1.5阶段</li>
+<li>Stage2阶段</li>
+</ul>
+</li>
+<li>内核引导启动</li>
+<li>系统初始化<ul>
+<li>/etc/inittab</li>
+<li>/etc/rc.sysinit</li>
+<li>加载系统服务</li>
+</ul>
+</li>
+<li>启动终端<ul>
+<li>默认启动/sbin/mingetty </li>
+<li>验证登录</li>
+<li>登录成功</li>
+</ul>
+</li>
+<li>如果级别为“5”，打开X-window</li>
+</ul>
+<p>简单理解Linux整个启动流程便是：POST加电自检——MBR引导——GRUB——加载内核</p>
+<h2 id="🎾what-is-“grub”？"><a href="#🎾what-is-“grub”？" class="headerlink" title="🎾what is “grub”？"></a>🎾what is “grub”？</h2><p>简答理解grub = 硬件启动OS（操作系统）的中介。</p>
+<p>但是当我们出现误删”grub”文件会出现什么样的结果？显然，我们的Linux将会无法正常启动。</p>
+<h4 id="how-修复”grub”文件？"><a href="#how-修复”grub”文件？" class="headerlink" title="how 修复”grub”文件？"></a>how 修复”grub”文件？</h4><p>在CentOS中，我们在修复grub文件的时候，需要特别注意的是：需要自动添加grub的配置文件，因为在系统恢复当中没有恢复这一环，而需要我们使用者手动进行文件的配置添加，如下图所示：</p>
+<p><img src="image-20220530231407710.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220530231407710"></p>
+<h5 id="安装grub的两种方法："><a href="#安装grub的两种方法：" class="headerlink" title="安装grub的两种方法："></a>安装grub的两种方法：</h5><h6 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h6><figure class="highlight awk"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs awk">grub-install --root-directory=DIR <span class="hljs-regexp">/dev/</span>DISK  安装grub stage和stage1 <span class="hljs-number">5</span>到 <span class="hljs-regexp">/dev/</span>DISK磁盘上，并复制GRUB相关文件到DIR/boot目录下<br></code></pre></td></tr></table></figure>
+
+<h6 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h6><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">grub</span> &gt; root (hd,<span class="hljs-comment">#)</span><br>grub &gt; setup (hd,<span class="hljs-comment">#)</span><br></code></pre></td></tr></table></figure>
+
+<p>进入救援模式：（开机0.5秒内安装Esc键）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">chroot <span class="hljs-regexp">/mnt/</span>sysimage/<br>grub install <span class="hljs-regexp">/dev/</span>sda<br></code></pre></td></tr></table></figure>
+
+<p><img src="image-20220530232149177.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220530232149177"></p>
+<p><code>vim /boot/grub/grub.conf</code></p>
+<p><img src="image-20220530232219478.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220530232219478"></p>
+<h4 id="第二阶段grub补救方法"><a href="#第二阶段grub补救方法" class="headerlink" title="第二阶段grub补救方法"></a><strong>第二阶段grub补救方法</strong></h4><p>在上述对grub简介当中，grub在Linux引导系统启动状态大致可分为三个阶段，当grub处于第一个阶段顺利完成进行，但是第二个引导阶段文件丢失我们该如何修复？<br>在进入上述的救援模式情况下，当进入如下界面时：</p>
+<p><img src="image-20220530232833837.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220530232833837"></p>
+<p>适用于文件被意外移除等情况</p>
+<p><code>e————对配置文件再次进行修改</code></p>
+<p><img src="image-20220530232951839.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220530232951839"></p>
+<h1 id="📱Linux内核修复"><a href="#📱Linux内核修复" class="headerlink" title="📱Linux内核修复"></a>📱Linux内核修复</h1><h2 id="how-修复内核？"><a href="#how-修复内核？" class="headerlink" title="how 修复内核？"></a>how 修复内核？</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">ramdisk文件的制作：<br>#mkinitrd命令<br>mkinitrd /boot/initramfs-<span class="hljs-constructor">$(<span class="hljs-params">uname</span> -<span class="hljs-params">r</span>)</span>.img <span class="hljs-constructor">$(<span class="hljs-params">uname</span> -<span class="hljs-params">r</span>)</span><br><br>#dracut命令<br>dracut /boot/initramfs-<span class="hljs-constructor">$(<span class="hljs-params">uname</span> -<span class="hljs-params">r</span>)</span>.img #(uname -r)<br></code></pre></td></tr></table></figure>
+
+<h4 id="why-内核”s””k”两个文件代表的含义？"><a href="#why-内核”s””k”两个文件代表的含义？" class="headerlink" title="why 内核”s””k”两个文件代表的含义？"></a>why 内核”s””k”两个文件代表的含义？</h4><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-function"><span class="hljs-title">s</span>---&gt;</span>（<span class="hljs-number">95</span>）开头（start）文件启动<br><span class="hljs-function"><span class="hljs-title">k</span>---&gt;</span>（<span class="hljs-number">5</span>）开头，停止<br>k的数值&gt;s的数值，优先级k&gt;s，类似于“栈”的原理，s文件越大，k文件越小。<br></code></pre></td></tr></table></figure>
+
+<h4 id="how-Linux如何运用Windows的磁盘分区？"><a href="#how-Linux如何运用Windows的磁盘分区？" class="headerlink" title="how Linux如何运用Windows的磁盘分区？"></a>how Linux如何运用Windows的磁盘分区？</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">电脑-计算机管理-存储、磁盘管理-新建分区-快速完成<br><br><span class="hljs-keyword">vm</span>-设置-添加-硬盘-下一步-SICI-添加硬件导向（选择第三项：使用物理磁盘）-下一步-选择磁盘，使用单个分区-快速完成<br></code></pre></td></tr></table></figure>
+
+<h1 id="🧨how-破解root密码"><a href="#🧨how-破解root密码" class="headerlink" title="🧨how 破解root密码"></a>🧨how 破解root密码</h1><p>基于centos 6，适用于忘记密码的情况下，进入救援模式，具体操作如下：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">ctrl+alt+ins<br>a<br><span class="hljs-number">1</span> s<span class="hljs-regexp">/S/</span>single<br>passwd<br>输入密码<br></code></pre></td></tr></table></figure>
+
+<p>如何加密？</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk">grub -crypt<br>输入秘密<br><br>vim <span class="hljs-regexp">/boot/g</span>rub/grub.conf<br>password --encrypt<br>:r!grub-crypt   <span class="hljs-regexp">//</span>导入密码<br>回车<br>密码（两遍）<br></code></pre></td></tr></table></figure>
+
+<span id="more"></span>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%9F%BA%E7%A1%80%E7%AF%87/">基础篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/05/31/Task01Week/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Task01Week</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/05/27/%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+                        <span class="hidden-mobile">进程和内存管理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>

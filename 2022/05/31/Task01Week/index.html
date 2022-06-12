@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/favicon.png">
+  <link rel="icon" href="/blog/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🎯TaskWeek01🧪1.图文并茂解释开源协定的区别？开源（GPL、BSD、Apache和双授协议的区别）开源的协议大致分为六种：GPL,LGPL,BSD,MIT,Apache等。关于开源，今天大家估计，耳熟能详到习以为然，但是这个概念大概可以延续到个世纪RadHat和CentOS之家的角逐，RadHat是Linux为编译降低门槛让更多的程序员使用的开行版的其中一个版本，当时几乎一家独大，他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Task01Week">
+<meta property="og:url" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/index.html">
+<meta property="og:site_name" content="Juliulian">
+<meta property="og:description" content="🎯TaskWeek01🧪1.图文并茂解释开源协定的区别？开源（GPL、BSD、Apache和双授协议的区别）开源的协议大致分为六种：GPL,LGPL,BSD,MIT,Apache等。关于开源，今天大家估计，耳熟能详到习以为然，但是这个概念大概可以延续到个世纪RadHat和CentOS之家的角逐，RadHat是Linux为编译降低门槛让更多的程序员使用的开行版的其中一个版本，当时几乎一家独大，他">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531214605736.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215137651.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215201524.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215221753.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215244476.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215308387.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215337700.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215358502.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531215421204.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531220215256.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531220350369.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531222339629.png">
+<meta property="og:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531224111911.png">
+<meta property="article:published_time" content="2022-05-31T13:37:25.000Z">
+<meta property="article:modified_time" content="2022-05-31T14:44:48.213Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://juliulian.github.io/blog/2022/05/31/Task01Week/image-20220531214605736.png">
+  
+  
+  <title>Task01Week - Juliulian</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"juliulian.github.io","root":"/blog/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong> Juliulian&#39;Blog </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/blog/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Task01Week">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-31 13:37" pubdate>
+        May 31, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Task01Week</h1>
+            
+            <div class="markdown-body">
+              <h1 id="🎯TaskWeek01"><a href="#🎯TaskWeek01" class="headerlink" title="🎯TaskWeek01"></a>🎯TaskWeek01</h1><h1 id="🧪1-图文并茂解释开源协定的区别？"><a href="#🧪1-图文并茂解释开源协定的区别？" class="headerlink" title="🧪1.图文并茂解释开源协定的区别？"></a>🧪1.图文并茂解释开源协定的区别？</h1><h3 id="开源（GPL、BSD、Apache和双授协议的区别）"><a href="#开源（GPL、BSD、Apache和双授协议的区别）" class="headerlink" title="开源（GPL、BSD、Apache和双授协议的区别）"></a>开源（GPL、BSD、Apache和双授协议的区别）</h3><h4 id="开源的协议大致分为六种：GPL-LGPL-BSD-MIT-Apache等。"><a href="#开源的协议大致分为六种：GPL-LGPL-BSD-MIT-Apache等。" class="headerlink" title="开源的协议大致分为六种：GPL,LGPL,BSD,MIT,Apache等。"></a>开源的协议大致分为六种：GPL,LGPL,BSD,MIT,Apache等。</h4><p>关于开源，今天大家估计，耳熟能详到习以为然，但是这个概念大概可以延续到个世纪RadHat和CentOS之家的角逐，RadHat是Linux为编译降低门槛让更多的程序员使用的开行版的其中一个版本，当时几乎一家独大，他们收取巨大的金额为购买的客户提供代码售后的服务，但是在每次完善修复的时候只提供为厂家源码，而这些源码对于技术人的门极高，就算有看得到的程序员也无法修改，为此，赚取了大量的服务费用。但是，很大社区的程序员觉得这是一种技术垄断，咬牙看不下去了，自觉形成社区，利用下班时间写写代码，编写了供商业免费开源使用的CentOS和RadHat抗衡，但是购买RadHat的厂家一般为实力强大的金主爸爸，不差钱，买的不是技术而是维修质量的售后服务，于是开源代码和工具只能运用于非传统行业，资金上差钱和差点意思的互联网公司。</p>
+<p>但是，开源之站并没有结束。企业开源的收入来源于开源代码的募捐和社区人员使用后有志之士提供的Bug解决方案，越是权威有名气的公司，使用的人数越多，捐募的金额也就越大，使用的人数越多，系统完善的程度便越完整。于是便制定了开源的协议。</p>
+<p>GPI：General Public License,是一种保证共享和修改的协议。这是最为著名的开源协议，因其制定的初心是保护开源的代码版权不受侵害，但是反其道被自身蚕食，但凡源码有一点GPI协议便定义为开源代码，而很大公司的业务是保密的，一旦开源便无商业机密可言，使得许多公司避GPI而不及。</p>
+<p>于是，后面便对开源的定义放宽看要求，如BCD和Apache协议，但是大家对开源的代码还是持非常谨慎的态度。</p>
+<p>直到现在，开源代码的协议得到基本的完善，有“双授协议”，一部分开源，一部分涉及商业机密的则不开源，让企业既可以利用开源代码让更多人使用，也保全了公司的整体利益。</p>
+<h6 id="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别"><a href="#开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别" class="headerlink" title="开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别"></a>开源许可证GPL、BSD、MIT、Mozilla、Apache和LGPL的区别</h6><p><img src="image-20220531214605736.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531214605736"></p>
+<h1 id="🥏2-安装centos-ubuntu系统"><a href="#🥏2-安装centos-ubuntu系统" class="headerlink" title="🥏2.安装centos ubuntu系统"></a>🥏2.安装centos ubuntu系统</h1><h5 id="CentOS-7安装配置"><a href="#CentOS-7安装配置" class="headerlink" title="CentOS 7安装配置"></a>CentOS 7安装配置</h5><ul>
+<li>VM/新建虚拟机/典型安装/ 稍后安装操作系统/Linux 选择64对应版本号/新建文件夹</li>
+<li>磁盘大小一般设置200G，选择将虚拟磁盘转为单个文件，如下图所示：</li>
+</ul>
+<p><img src="image-20220531215137651.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215137651"></p>
+<ul>
+<li>虚拟机硬件设置：内存2G，处理器2颗，硬盘200G，选择下载好的iso镜像，如下图所示：</li>
+</ul>
+<p><img src="image-20220531215201524.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215201524"></p>
+<ul>
+<li> 网络链接设置：VM/编辑/NAT模式/管理员设置/设置“子网”/点击DHCP设置/修改起始IP地址，如下图所示：</li>
+</ul>
+<p><img src="image-20220531215221753.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215221753"></p>
+<ul>
+<li>开启虚拟机/选择第二项，回车（校正ios镜像哈希值）<ul>
+<li>选择语言</li>
+<li>选择时区——shanghai</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20220531215244476.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215244476"></p>
+<ul>
+<li>选择界面，Server with GUI （带图形界面），Minimal Innstall（默认），如下图所示：</li>
+</ul>
+<p><img src="image-20220531215308387.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215308387"></p>
+<ul>
+<li>选择自动设置，如图所示：</li>
+</ul>
+<p><img src="image-20220531215337700.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215337700"></p>
+<ul>
+<li>硬盘参数设置，选择Standard Partition（/100G，/boot 1G ，/data 50G ， swap 2G/centos8 4G），ext4/)</li>
+<li>网络设置：打开网络/确认是否链接地址/修改设备昵称，如下图所示：</li>
+</ul>
+<p><img src="image-20220531215358502.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215358502"></p>
+<ul>
+<li>设置用户名和密码，如下图所示：</li>
+</ul>
+<p><img src="image-20220531215421204.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531215421204"></p>
+<p>（以上内容为本人旧博客内容：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Julien1021/p/16211468.html">CentOS 7安装与设置 - 林清|Julien - 博客园 (cnblogs.com)</a>）</p>
+<h1 id="🧢3-ifconfig-VS-ip-addr-list-查询ip地址"><a href="#🧢3-ifconfig-VS-ip-addr-list-查询ip地址" class="headerlink" title="🧢3.ifconfig VS ip addr list 查询ip地址"></a>🧢3.ifconfig VS ip addr list 查询ip地址</h1><h6 id="ifconfig-VS-ip-addr-list-区别？"><a href="#ifconfig-VS-ip-addr-list-区别？" class="headerlink" title="ifconfig VS ip addr list 区别？"></a>ifconfig VS ip addr list 区别？</h6><p>两者都是用来查询linux网络配置的内部命令，唯一区别是：你会发现在一些centos或者unubtu版本使用”ifconfig”命令并不能生效，原因是”ifconfig”是最早的命令，而随着软件的更新迭代，一些软件已经放弃了使用”ifconfig”这辆”老爷车”，而只支持”ip addr list”的新能电动源车。</p>
+<p><code>ifconfig</code></p>
+<p><img src="image-20220531220215256.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531220215256"></p>
+<p><code>而&quot;ip addr list&quot;太啰嗦，使用率又高，于是可以直接缩写为&quot;ip a l&quot;，具体内容如下图所示：</code></p>
+<p><img src="image-20220531220350369.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531220350369"></p>
+<h1 id="🧣4-Linux-FHS结构"><a href="#🧣4-Linux-FHS结构" class="headerlink" title="🧣4.Linux FHS结构"></a>🧣4.Linux FHS结构</h1><p>Linux FHS结构：Filesystem Hierarchy Standard（FHS，文件系统层次化标准）标准。</p>
+<p>说人话便是：Linxu的标准目录结构。</p>
+<h6 id="why-FHS？FHS的诞生解决了什么问题？"><a href="#why-FHS？FHS的诞生解决了什么问题？" class="headerlink" title="why FHS？FHS的诞生解决了什么问题？"></a>why FHS？FHS的诞生解决了什么问题？</h6><p>Linxu的标准目录结构，奥卡姆剃刀原则：如无必要，则无新添，Linux FHS 产生是解决了文件规范问题，让Linux文件标准化。因为Linux是一款以”自由”为核心的软件，早期大家使用Linux都DIY自己设置自己的Linux目录结构，但是这样会产生很大的问题，于是Linux便出出台了目录的标准，将目录结构文件分类且规范了，更加易于使用者的操作和文件配置。</p>
+<h6 id="what-is-FHS？"><a href="#what-is-FHS？" class="headerlink" title="what is FHS？"></a>what is FHS？</h6><p>Linux目录结构，如下图所示：</p>
+<p><img src="image-20220531222339629.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531222339629"></p>
+<p>而这个目录结构也深刻体现了Linux的哲学思想：</p>
+<ol>
+<li>一切皆为文件</li>
+<li>一个程序只做一件事情</li>
+<li>避免和用户进行交互</li>
+<li>文件都以文本的存储和配置</li>
+</ol>
+<p>结合设计者对Linux的设计理念便可分析Linux 的目录结构：</p>
+<ul>
+<li>一个程序只做一件事情<ul>
+<li>bin — 系统启动时需要的执行文件（二进制）</li>
+<li>sbin — 可执行程序的目录，但大多存放涉及系统管理的命令，只有root权限才能执行</li>
+<li>proc — 虚拟，存在linux内核镜像</li>
+</ul>
+</li>
+<li>在Linux中，可以理解为有user和root管理者，而被管理的Linux仓库又分为”临时仓库”和”固定仓库”<ul>
+<li>管理者<ul>
+<li>user</li>
+<li>root</li>
+</ul>
+</li>
+<li>临时仓库<ul>
+<li>tmp — 临时文件目录，系统启动后的临时文件存放在/var/tmp</li>
+<li>mnt — 临时用于挂载文件系统的地方</li>
+</ul>
+</li>
+<li>固定仓库<ul>
+<li>lib — 根文件系统目录下程序和核心模块的公共库（grub）</li>
+<li>boot — 引导加载器所需文件，系统所需图片保存于此</li>
+<li>dev — 设备文件目录</li>
+<li>etc — 配置文件</li>
+<li>home — 存储普通用户的个人文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>其中文件又分为两大类，如下图所示：</p>
+<p><img src="image-20220531224111911.png" srcset="/blog/img/loading.gif" lazyload alt="image-20220531224111911"></p>
+<h1 id="【参考文档】"><a href="#【参考文档】" class="headerlink" title="【参考文档】"></a>【参考文档】</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/laov/p/3409875.html">https://www.cnblogs.com/laov/p/3409875.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/happyframework/p/4480228.html">Linux：FHS标准 - 幸福框架 - 博客园 (cnblogs.com)</a></p>
+<span id="more"></span>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/categories/%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95/">学习测试</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/blog/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/06/01/%E5%8D%9A%E5%AE%A2CSS%E6%A0%B7%E5%BC%8F%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">博客CSS样式无法加载问题</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/05/30/Linu%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%92%8C%E5%86%85%E6%A0%B8%E7%AE%A1%E7%90%86/">
+                        <span class="hidden-mobile">Linu系统启动和内核管理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+</body>
+</html>
